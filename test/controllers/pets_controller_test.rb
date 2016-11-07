@@ -37,4 +37,25 @@ class PetsControllerTest < ActionController::TestCase
     body = JSON.parse(response.body)
     assert_equal keys, body.map(&:keys).flatten.uniq.sort
   end
+
+  test "returns status 200 when showing an existing pet" do
+    get :show, {id: pets(:one).id}
+    assert_response :ok
+  end
+
+  test "returns status 204 when showing a non-existent pet" do
+    get :show, {id: []}
+    assert_response :no_content
+  end
+
+  test "return all pets with a specified name" do
+    
+  end
+
+  # test "#index returns json" do
+  #   get :index
+  #   assert_match 'application/json',
+  #   response.header['Content-Type']
+  # end
+
 end
